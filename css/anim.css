@@ -1,0 +1,39 @@
+.anim_needle0_date0-to-date1{
+  animation-name: date0-to-date1;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+}
+
+@keyframes date0-to-date1 {
+  0%    {transform: rotate(0deg);}
+  80%   {transform: rotate(180deg);}
+  90%   {transform: rotate(230deg);}
+  100%  {transform: rotate(220deg);}
+}
+
+.anim_needle0_date0-to-days{
+  animation-name: date0-to-days;
+  animation-duration: 0.3s;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+}
+
+@keyframes date0-to-days {
+  0%    {transform: rotate(0deg);}
+  90%   {transform: rotate(130deg);}
+  100%  {transform: rotate(120deg);}
+}
+
+.anim_needle0_days-to-date1{
+  animation-name: days-to-date1;
+  animation-duration: 0.3s;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+}
+
+@keyframes days-to-date1 {
+  0%    {transform: rotate(120deg);}
+  90%   {transform: rotate(230deg);}
+  100%  {transform: rotate(220deg);}
+}
