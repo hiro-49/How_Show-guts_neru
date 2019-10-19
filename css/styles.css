@@ -1,0 +1,223 @@
+body{
+  margin: 0;
+  background: #6FBDA6;
+}
+
+.UpContainer{
+  display: flex;
+}
+
+.CatAlea{
+  width: 1090px;
+  height: 630px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 要素を重ねて時計を作っていくよ */
+.clock{
+  position:relative;
+  width: 450px;
+  height: 450px;
+}
+
+.clock__input-date0{
+  position: absolute;
+  width: 100px;
+  left: 175px;
+  top: 70px;
+  z-index: 30;
+}
+
+.clock__input-date1{
+  position: absolute;
+  left: 110px;
+  top: 340px;
+  width: 100px;
+  z-index: 30;
+}
+
+.clock__input-days{
+  position: absolute;
+  left: 320px;
+  top: 280px;
+  width: 100px;
+  z-index: 30;
+}
+
+.clock__needle{
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  z-index: 20;
+}
+
+.anim_needle0_date0-to-date1{
+  animation-name: date0-to-date1;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+}
+
+@keyframes date0-to-date1 {
+  0%    {transform: rotate(0deg);}
+  80%   {transform: rotate(180deg);}
+  90%   {transform: rotate(230deg);}
+  100%  {transform: rotate(220deg);}
+}
+
+.anim_needle0_date1-to-date0{
+  animation-name: date1-to-date0;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+}
+
+@keyframes date1-to-date0 {
+  0%    {transform: rotate(220deg);}
+  90%   {transform: rotate(-10deg);}
+  100%  {transform: rotate(0deg);}
+}
+
+.anim_needle0_date0-to-days{
+  animation-name: date0-to-days;
+  animation-duration: 0.3s;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+}
+
+@keyframes date0-to-days {
+  0%    {transform: rotate(0deg);}
+  90%   {transform: rotate(130deg);}
+  100%  {transform: rotate(120deg);}
+}
+
+.anim_needle0_days-to-date0{
+  animation-name: days-to-date0;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+}
+
+@keyframes days-to-date0 {
+  0%    {transform: rotate(120deg);}
+  90%   {transform: rotate(-10deg);}
+  100%  {transform: rotate(0deg);}
+}
+
+.anim_needle0_days-to-date1{
+  animation-name: days-to-date1;
+  animation-duration: 0.3s;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+}
+
+@keyframes days-to-date1 {
+  0%    {transform: rotate(120deg);}
+  90%   {transform: rotate(230deg);}
+  100%  {transform: rotate(220deg);}
+}
+
+.anim_needle0_date1-to-days{
+  animation-name: date1-to-days;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+}
+
+@keyframes date1-to-days {
+  0%    {transform: rotate(220deg);}
+  90%   {transform: rotate(110deg);}
+  100%  {transform: rotate(120deg);}
+}
+
+.clock__circle{
+  position: absolute;
+  left: 125px;
+  top: 125px;
+  z-index: 5;
+  background-color: #B3AFF1;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.clock__circle::before{
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0px;
+  left: -100px;
+  width: 200px;
+  height: 200px;
+  z-index: 6;
+  background: #E4E4FF;
+  transform-origin: right 100px;
+  animation: rotate-circle-left 0.5s ease-in forwards;
+  animation-delay: 1s;
+}
+
+.clock__circle::after{
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0px;
+  left: 100px;
+  width: 200px;
+  height: 200px;
+  z-index: 7;
+  background: #E4E4FF;
+  transform-origin: left 100px;
+  animation: rotate-circle-right 0.5s ease-in forwards;
+  animation-delay: 1s;
+}
+
+@keyframes rotate-circle-right {
+  0% {
+    transform: rotate(0deg);
+    background: #E4E4FF;
+  }
+  80% {
+    transform: rotate(180deg);
+    background: #E4E4FF;
+  }
+  80.01% {
+    transform: rotate(360deg);
+    background: #B3AFF1;
+  }
+  100% {
+    transform: rotate(360deg);
+    background: #B3AFF1;
+  }
+}
+
+@keyframes rotate-circle-left {
+  0% {
+    transform: rotate(0deg);
+  }
+  80% {
+    transform: rotate(0deg);
+  }
+  90% {
+    transform: rotate(50deg);
+  }
+  100% {
+    transform: rotate(40deg);
+  }
+}
+
+.SideNews{
+  background: #0039FF;
+  width: 350px;
+  height: 630px;
+}
+
+.BottomNews{
+  background: -moz-linear-gradient(top, #002DC6, #416CFF);
+  background: -webkit-linear-gradient(top, #002DC6, #416CFF);
+  background: linear-gradient(to bottom, #002DC6, #416CFF);
+  width: 1440px;
+  height: 136px;
+}
