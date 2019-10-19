@@ -1,5 +1,4 @@
 'use strict';
-import anime from 'animejs';
 
 {
   //各要素を取得
