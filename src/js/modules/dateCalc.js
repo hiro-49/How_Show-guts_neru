@@ -28,7 +28,7 @@ export default class dateCalc{
     days = originDate1[this.D] - Date0[this.D];
     console.log(days);
     while(Date0[this.M] != originDate1[this.M]){
-      days += HowMonthDays(Date0[this.M],IsLeapYear(Date0[this.Y]));
+      days += this.HowMonthDays(Date0[this.M],IsLeapYear(Date0[this.Y]));
       Date0[this.M]++;
       if(Date0[this.M] > 12){
         Date0[this.M] = 1;
@@ -38,7 +38,7 @@ export default class dateCalc{
     console.log(days);
     var correctionNum = originDate1 [this.M] >= 3 ? 1 : 0;
     while(Date0[this.Y] != originDate1[this.Y]){
-      days += IsLeapYear(Date0[this.Y] + correctionNum) ? 366 : 365;
+      days += this.IsLeapYear(Date0[this.Y] + correctionNum) ? 366 : 365;
       Date0[this.Y]++;
     }
     console.log(days);
@@ -57,14 +57,14 @@ export default class dateCalc{
     var correctionNum = originDate[this.M] >= 3 ? 1 : 0;
     var days = parseInt(s_days.value);
 
-    var nextYearDays = IsLeapYear(date[this.Y] + correctionNum) ? 366 : 365;
+    var nextYearDays = this.IsLeapYear(date[this.Y] + correctionNum) ? 366 : 365;
     while(days >= nextYearDays){
       days -= nextYearDays;
       date[this.Y]++;
-      nextYearDays = IsLeapYear(date[this.Y] + correctionNum) ? 366 : 365;
+      nextYearDays = this.IsLeapYear(date[this.Y] + correctionNum) ? 366 : 365;
     }
 
-    var thisMonthDays = HowMonthDays(date[this.M], IsLeapYear(date[this.Y]));
+    var thisMonthDays = this.HowMonthDays(date[this.M], this.IsLeapYear(date[this.Y]));
     while(days >= thisMonthDays){
       days -= thisMonthDays;
       date[this.M]++;
@@ -72,7 +72,7 @@ export default class dateCalc{
         date[this.M] = 1;
         date[this.Y]++;
       }
-      thisMonthDays = HowMonthDays(date[this.M], IsLeapYear(date[this.Y]));
+      thisMonthDays = this.HowMonthDays(date[this.M], this.IsLeapYear(date[this.Y]));
     }
 
     date[this.D] += days;
@@ -84,7 +84,7 @@ export default class dateCalc{
         date[this.Y]++;
       }
       if(date[this.M] == 2){
-        thisMonthDays = HowMonthDays(date[this.M],IsLeapYear(date[this.Y]))
+        thisMonthDays = this.HowMonthDays(date[this.M],this.IsLeapYear(date[this.Y]))
       }
     }
     return date[this.Y] + '-' + date[this.M] + '-' + date[this.D];
