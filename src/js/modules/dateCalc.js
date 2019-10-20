@@ -28,7 +28,7 @@ export default class dateCalc{
     days = originDate1[this.D] - Date0[this.D];
     console.log(days);
     while(Date0[this.M] != originDate1[this.M]){
-      days += this.HowMonthDays(Date0[this.M],IsLeapYear(Date0[this.Y]));
+      days += this.HowMonthDays(Date0[this.M],this.IsLeapYear(Date0[this.Y]));
       Date0[this.M]++;
       if(Date0[this.M] > 12){
         Date0[this.M] = 1;
