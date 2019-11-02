@@ -15,6 +15,12 @@ body{
   align-items: center;
 }
 
+.Cat{
+  position: absolute;
+  top: -170px;
+  right: 23px;
+}
+
 /* 要素を重ねて時計を作っていくよ */
 .clock{
   position:relative;
