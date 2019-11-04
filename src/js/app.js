@@ -1,6 +1,7 @@
 'use strict';
 import dateCalc from "./modules/dateCalc.js";
 import Needle from "./modules/Needle";
+import StringColor from "./modules/SideNewsStringColor";
 
 {
   //各要素を取得
@@ -13,6 +14,7 @@ import Needle from "./modules/Needle";
   //インスタンス
   var c_dateCalc = new dateCalc();
   var needle = new Needle(document.getElementById('needle0'));
+  var stringColor = new StringColor(document.getElementById('sideNewsString'));
 
 
   //イベントリスナーを追加

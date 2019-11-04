@@ -1,3 +1,8 @@
+@font-face {
+  font-family: 'natumemozi';
+  src: url('../fonts/natumemozi.ttf') format('truetype');
+}
+
 body{
   margin: 0;
   background: #6FBDA6;
@@ -214,10 +219,21 @@ body{
   }
 }
 
-.SideNews{
+.sideNews{
+  text-align: center;
   background: #0039FF;
   width: 350px;
   height: 630px;
+}
+
+.sideNews__string{
+  display: inline-block;
+  vertical-align: middle;
+  height: 100%;
+  writing-mode: vertical-rl;
+  font-size: 70px;
+  font-family: 'natumemozi';
+  color: #F00;
 }
 
 .BottomNews{
