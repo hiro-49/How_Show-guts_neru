@@ -8,7 +8,6 @@ export default class StringColor{
   }
 
   StringColorAnim(){
-    console.log("StringColorAnim");
     anime({
       targets:this.string,
       color:['#F00', '#FF0', '#0F0'],

@@ -3,6 +3,11 @@
   src: url('../fonts/natumemozi.ttf') format('truetype');
 }
 
+/* スクロール禁止 */
+html, body{
+  overflow: hidden;
+}
+
 body{
   margin: 0;
   background: #6FBDA6;
@@ -226,7 +231,7 @@ body{
   height: 630px;
 }
 
-.sideNews__string{
+.sideNews__sentence{
   display: inline-block;
   vertical-align: middle;
   height: 100%;
@@ -242,4 +247,16 @@ body{
   background: linear-gradient(to bottom, #002DC6, #416CFF);
   width: 1440px;
   height: 136px;
+  display: flex;
+  align-items: center;
+}
+
+.BottomNews__sentence{
+  margin: 0;
+  font-size: 60px;
+  font-family: 'natumemozi';
+  white-space: nowrap;
+  display: inline-block;
+  text-stroke: 1px #fff;
+  -webkit-text-stroke: 1px #ddd;
 }
