@@ -11,7 +11,7 @@ import BottomNewsScroll from "./modules/BottomNewsScroll";
   const s_days = document.getElementById('days');
   //正規表現
   const regexp_date = new RegExp(/^\d{4}-\d{2}-\d{2}$/);
-  const regexp_days = new RegExp(/^\d+$/);
+  const regexp_days = new RegExp(/^-?\d+$/);
   //変数
   var today;
   //タイプライター風表示用
@@ -25,6 +25,8 @@ import BottomNewsScroll from "./modules/BottomNewsScroll";
   //html読み込み後実行
   window.onload = () => {
     today = new Date();
+    i_date1.setAttribute('disable', 'disable');
+    s_days.setAttribute('disable', 'disable');
     tutorial()
     .then(inputDate0)
     .then(inputDate1);
@@ -33,26 +35,42 @@ import BottomNewsScroll from "./modules/BottomNewsScroll";
   //イベントリスナーを追加
   i_date0.addEventListener('blur', ()=>{
     if(regexp_date.test(i_date0.value)){
-      needle.AnimToDate1();
+      i_date1.removeAttribute('disable');
+      s_days.removeAttribute('disable');
     } else {
       i_date0.value = "false";
+      i_date1.setAttribute('disable', 'disable');
+      s_days.setAttribute('disable', 'disable');
     }
+  })
 
+  i_date0.addEventListener('focus', ()=>{
+    needle.AnimToDate0();
   })
 
   i_date1.addEventListener('blur', ()=>{
     if(regexp_date.test(i_date1.value)){
-      needle.AnimToDays();
-      s_days.value = c_dateCalc.CalcDate0_Date1(i_date0, i_date1);
+      // s_days.focus();
+      if(i_date0.value != "false"){
+        needle.AnimToDays();
+        s_days.value = c_dateCalc.CalcDate0_Date1(i_date0, i_date1);
+      }
     } else {
       i_date1.value = "false";
     }
   })
 
+  i_date1.addEventListener('focus', ()=>{
+    needle.AnimToDate1();
+  })
+
   s_days.addEventListener('blur', ()=>{
     if(regexp_days.test(s_days.value)){
-      needle.AnimToDate1();
-      i_date1.value = c_dateCalc.Date0_Days(i_date0, s_days);
+      // i_date1.focus();
+      if(i_date0.value != "false"){
+        needle.AnimToDate1();
+        i_date1.value = c_dateCalc.CalcDate0_Days(i_date0, s_days);
+      }
     } else {
       s_days.value = "false";
     }
@@ -88,6 +106,7 @@ import BottomNewsScroll from "./modules/BottomNewsScroll";
 
   var inputDate1 = () => {
     let str = (today.getFullYear() + 1) + '-01-01';
+    needle.AnimToDate1();
     i_date1.focus();
     setTypewriter(i_date1, str)
     .then(() => {

@@ -21,14 +21,14 @@ export default class Needle{
         break;
       case this.date1:
         anime({
-          target:this.needle,
+          targets:this.needle,
           rotate:360
         })
         break;
       case this.days:
         anime({
-          target:this.needle,
-          rotate:360
+          targets:this.needle,
+          rotate:0
         })
         break;
     }
@@ -50,7 +50,7 @@ export default class Needle{
         break;
       case this.days:
         anime({
-          target:this.needle,
+          targets:this.needle,
           rotate:220
         })
         break;
@@ -62,15 +62,17 @@ export default class Needle{
     switch(this.state){
       case this.date0:
         anime({
-          target:this.needle,
+          targets:this.needle,
           rotate:120
         })
+        console.log('Exec AnimToDays()');
         break;
       case this.date1:
         anime({
-          target:this.needle,
+          targets:this.needle,
           rotate:120
         })
+        console.log('Exec AnimToDays()');
         break;
       case this.days:
         break;

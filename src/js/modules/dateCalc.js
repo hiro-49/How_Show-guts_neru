@@ -19,10 +19,28 @@ export default class dateCalc{
     var Date0 = new Array(3);
     var originDate1 = new Array(3);
     var days = 0;
+    let isNegative = false;
 
     for(var i = 0; i < 3; i++){
       Date0[i] = parseInt(separatedDate0[i]);
       originDate1[i] = parseInt(separatedDate1[i]);
+    }
+
+    //Date0 < originDateとなるようにする
+    if(originDate1[this.Y] < Date0[this.Y]){
+      isNegative = true;
+    }else if(originDate1[this.Y] == Date0[this.Y] && originDate1[this.M] < Date0[this.Y]){
+      isNegative = true;
+    }else if(originDate1[this.Y] == Date0[this.Y] && originDate1[this.M] == Date0[this.M] && originDate1[this.D]  < Date0[this.D]){
+      isNegative = true;
+    }
+
+    if(isNegative){
+      for(let i = 0; i < 3; i++){
+        let number = Date0[i];
+        Date0[i] = originDate1[i];
+        originDate1[i] = number;
+      }
     }
 
     days = originDate1[this.D] - Date0[this.D];
@@ -41,6 +59,10 @@ export default class dateCalc{
       days += this.IsLeapYear(Date0[this.Y] + correctionNum) ? 366 : 365;
       Date0[this.Y]++;
     }
+
+    if(isNegative){
+      days *= -1;
+    }
     console.log(days);
     return days;
   }
@@ -54,40 +76,87 @@ export default class dateCalc{
       originDate[i] = parseInt(separatedDate0[i]);
       date[i] = originDate[i];
     }
-    var correctionNum = originDate[this.M] >= 3 ? 1 : 0;
     var days = parseInt(s_days.value);
-
-    var nextYearDays = this.IsLeapYear(date[this.Y] + correctionNum) ? 366 : 365;
-    while(days >= nextYearDays){
-      days -= nextYearDays;
-      date[this.Y]++;
-      nextYearDays = this.IsLeapYear(date[this.Y] + correctionNum) ? 366 : 365;
-    }
-
-    var thisMonthDays = this.HowMonthDays(date[this.M], this.IsLeapYear(date[this.Y]));
-    while(days >= thisMonthDays){
-      days -= thisMonthDays;
-      date[this.M]++;
-      if(date[this.M] == 13){
-        date[this.M] = 1;
+    if(days >= 0){
+      let correctionNum = originDate[this.M] >= 3 ? 1 : 0;
+      //date[this.Y]を計算
+      //来年の同じ日までの日数を計算してdaysから引く
+      //daysが足りなくなるまで繰り返す
+      var nextYearDays = this.IsLeapYear(date[this.Y] + correctionNum) ? 366 : 365;
+      while(days >= nextYearDays){
+        days -= nextYearDays;
         date[this.Y]++;
+        nextYearDays = this.IsLeapYear(date[this.Y] + correctionNum) ? 366 : 365;
       }
-      thisMonthDays = this.HowMonthDays(date[this.M], this.IsLeapYear(date[this.Y]));
-    }
 
-    date[this.D] += days;
-    if(date[this.D] > thisMonthDays){
-      date[this.M]++;
-      date[this.D] -= thisMonthDays;
-      if(date[this.M] == 13){
-        date[this.M] = 1;
-        date[this.Y]++;
+      //date[this.M]を計算
+      //来月の同じ日までの日数を(ry
+      var thisMonthDays = this.HowMonthDays(date[this.M], this.IsLeapYear(date[this.Y]));
+      while(days >= thisMonthDays){
+        days -= thisMonthDays;
+        date[this.M]++;
+        if(date[this.M] == 13){
+          date[this.M] = 1;
+          date[this.Y]++;
+        }
+        thisMonthDays = this.HowMonthDays(date[this.M], this.IsLeapYear(date[this.Y]));
       }
-      if(date[this.M] == 2){
-        thisMonthDays = this.HowMonthDays(date[this.M],this.IsLeapYear(date[this.Y]))
+
+      //残りが日付となる
+      //30日しかない月なのに31日になると困るからそこの処理はする
+      date[this.D] += days;
+      if(date[this.D] > thisMonthDays){
+        date[this.M]++;
+        date[this.D] -= thisMonthDays;
+        if(date[this.M] == 13){
+          date[this.M] = 1;
+          date[this.Y]++;
+        }
+        if(date[this.M] == 2){
+          thisMonthDays = this.HowMonthDays(date[this.M],this.IsLeapYear(date[this.Y]))
+        }
+      }
+    }else{
+      days *= -1;
+      var correctionNum = originDate[this.M] <= 2 ? 1 : 0;
+      //date[this.Y]を計算
+      //去年の同じ日までの日数を計算してdaysから引く
+      //daysが足りなくなるまで繰り返す
+      var previousYearDays = this.IsLeapYear(date[this.Y] - correctionNum) ? 366 : 365;
+      while(days >= previousYearDays){
+        days -= previousYearDays;
+        date[this.Y]--;
+        previousYearDays = this.IsLeapYear(date[this.Y] - correctionNum) ? 366 : 365;
+      }
+      //date[this.M]を計算
+      //先月の同じ日までの日数を(ry
+      var thisMonthDays = this.HowMonthDays(date[this.M] - 1, this.IsLeapYear(date[this.Y]));
+      while(days >= thisMonthDays){
+        days -= thisMonthDays;
+        date[this.M]--;
+        if(date[this.M] == 0){
+          date[this.M] = 12;
+          date[this.Y]--;
+        }
+        thisMonthDays = this.HowMonthDays(date[this.M] - 1, this.IsLeapYear(date[this.Y]));
+      }
+      //残りが日付とはならない
+      //今の日付と残りのdaysを比較してdaysの方が大きければdaysからdateを引く
+      //その後先月の最終日付からdaysを引く
+      //dateの方が大きければdaysを引いて終了
+      if(date[this.D] < days){
+        days -= date[this.D];
+        date[this.M]--;
+        if(date[this.M] == 0){
+          date[this.M] = 12;
+          date[this.Y]--;
+        }
+        date[this.D] = this.HowMonthDays(date[this.M],this.IsLeapYear(date[this.Y])) - days;
+      }else{
+        date[this.D] -= days;
       }
     }
-    return date[this.Y] + '-' + date[this.M] + '-' + date[this.D];
+    return date[this.Y] + '-' + ('00' + date[this.M]).slice(-2) + '-' + ('00' + date[this.D]).slice(-2);
   }
 
   //yearが閏年かどうか
@@ -103,7 +172,7 @@ export default class dateCalc{
 
   // monthの日数を返す
   HowMonthDays(month, isLeapYear){
-    if(month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12){
+    if(month == 0 || month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12){
       return 31;
     } else if(month == 2){
       if(isLeapYear){
