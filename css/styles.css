@@ -257,6 +257,8 @@ body{
   font-family: 'natumemozi';
   white-space: nowrap;
   display: inline-block;
-  text-stroke: 1px #fff;
-  -webkit-text-stroke: 1px #ddd;
+  color: white;
+  /* text-stroke: 3px #fff; */
+  /* -webkit-text-stroke: 3px #ddd; */
+  /* -webkit-text-stroke: 1px #ddd; */
 }
