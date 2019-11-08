@@ -1,3 +1,13 @@
+@font-face {
+  font-family: 'natumemozi';
+  src: url('../fonts/natumemozi.ttf') format('truetype');
+}
+
+/* スクロール禁止 */
+html, body{
+  overflow: hidden;
+}
+
 body{
   margin: 0;
   background: #6FBDA6;
@@ -13,6 +23,12 @@ body{
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.Cat{
+  position: absolute;
+  top: -170px;
+  right: 23px;
 }
 
 /* 要素を重ねて時計を作っていくよ */
@@ -208,10 +224,21 @@ body{
   }
 }
 
-.SideNews{
+.sideNews{
+  text-align: center;
   background: #0039FF;
   width: 350px;
   height: 630px;
+}
+
+.sideNews__sentence{
+  display: inline-block;
+  vertical-align: middle;
+  height: 100%;
+  writing-mode: vertical-rl;
+  font-size: 70px;
+  font-family: 'natumemozi';
+  color: #F00;
 }
 
 .BottomNews{
@@ -220,4 +247,18 @@ body{
   background: linear-gradient(to bottom, #002DC6, #416CFF);
   width: 1440px;
   height: 136px;
+  display: flex;
+  align-items: center;
+}
+
+.BottomNews__sentence{
+  margin: 0;
+  font-size: 60px;
+  font-family: 'natumemozi';
+  white-space: nowrap;
+  display: inline-block;
+  color: white;
+  /* text-stroke: 3px #fff; */
+  /* -webkit-text-stroke: 3px #ddd; */
+  /* -webkit-text-stroke: 1px #ddd; */
 }

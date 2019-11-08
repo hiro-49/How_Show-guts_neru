@@ -12,5 +12,27 @@ module.exports = {
     filename: 'bundle.js',
     // 出力先のパス（絶対パスを指定する必要がある）
     path: path.join(__dirname, 'js')
+  },
+
+  module:{
+    rules: [
+      {
+        //拡張子 .js の場合
+        test: /\.js$/,
+        use: [
+          {
+            // Babel を利用する
+            loader: "babel-loader",
+            // Babel のオプションを指定する
+            options: {
+              presets: [
+                // プリセットを指定することで、ES2019 を ES5 に変換
+                "@babel/preset-env"
+              ]
+            }
+          }
+        ]
+      }
+    ]
   }
 };
