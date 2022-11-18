@@ -19,7 +19,7 @@
   "homepage": "https://github.com/hiro-49/practice_tax#readme",
   "devDependencies": {
     "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.9"
+    "webpack-cli": "^3.3.12"
   },
   "dependencies": {
     "@babel/core": "^7.6.4",
